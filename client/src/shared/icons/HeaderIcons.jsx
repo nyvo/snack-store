@@ -1,0 +1,43 @@
+import styled from "styled-components";
+import { FiMenu } from "react-icons/fi";
+import { IoIosSearch } from "react-icons/io";
+import { IoCartOutline } from "react-icons/io5";
+import { RiAccountCircleLine } from "react-icons/ri";
+
+const MenuButton = styled(FiMenu)`
+  color: var(--color-black);
+  font-size: 24px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SearchButton = styled(IoIosSearch)`
+  color: var(--color-950);
+  font-size: 24px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const CartButton = styled(IoCartOutline)`
+  color: var(--color-950);
+  font-size: 24px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const AccountButton = styled(RiAccountCircleLine)`
+  color: var(--color-950);
+  font-size: 24px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export { MenuButton, SearchButton, CartButton, AccountButton };
