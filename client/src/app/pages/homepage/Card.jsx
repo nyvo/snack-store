@@ -9,28 +9,22 @@ const Card = ({ product }) => {
 
   return (
     <CardContainer href={`/product/${productId}`}>
-      <MainContent>
-        <CardFlexOne>
+      <ImgContainer>
+        <ProductImg
+          src={product.image || "Error loading image"}
+          alt={product.title}
+        />
+      </ImgContainer>
+      <ProductInfoContainer>
+        <VendorTitleContainer>
           <BodySemiBold>{product.vendor}</BodySemiBold>
-        </CardFlexOne>
-
-        <TitleWrapper>
-          <SmallRegular>{product.title}</SmallRegular>
-        </TitleWrapper>
-
-        <ImgContainer>
-          <ProductImg
-            src={product.image || "Error loading image"}
-            alt={product.title}
-          />
-        </ImgContainer>
-
-        <StockStatus product={product} />
-      </MainContent>
-
-      <PriceWrapper>
-        <BodySemiBold>${productPrice}</BodySemiBold>
-      </PriceWrapper>
+          <SmallRegular color="var(--color-600)">{product.title}</SmallRegular>
+        </VendorTitleContainer>
+        <PriceStockContainer>
+          <BodySemiBold>${productPrice}</BodySemiBold>
+          <StockStatus product={product} />
+        </PriceStockContainer>
+      </ProductInfoContainer>
     </CardContainer>
   );
 };
@@ -47,9 +41,11 @@ const CardContainer = styled.a`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  gap: 1rem;
   width: 100%;
   min-width: 225px;
   max-width: 225px;
+  min-height: 320px;
   background-color: var(--color-050);
   border-radius: 16px;
   text-decoration: none;
@@ -57,28 +53,9 @@ const CardContainer = styled.a`
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 `;
 
-const MainContent = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const CardFlexOne = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const TitleWrapper = styled.div`
-  min-height: 2.5rem; /* Ensures space for 2 lines if needed */
-  display: flex;
-  align-items: flex-start;
-`;
-
 const ImgContainer = styled.div`
   width: 100%;
-  height: 100px;
+  height: 150px;
   position: relative;
   display: flex;
   align-items: center;
@@ -91,7 +68,27 @@ const ProductImg = styled.img`
   object-fit: contain;
 `;
 
-const PriceWrapper = styled.div`
-  margin-top: 0.5rem;
-  text-align: right;
+const ProductInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  justify-content: space-between;
+  flex: 1;
+`;
+
+const VendorTitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+`;
+
+const PriceStockContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
 `;

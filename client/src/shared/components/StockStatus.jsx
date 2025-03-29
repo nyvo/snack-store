@@ -43,7 +43,7 @@ export const StockStatus = ({ product }) => {
   return (
     <StockStatusWrapper>
       {status.icon}
-      <LabelRegular>
+      <LabelRegular color="var(--color-600)">
         {typeof status.text === "function"
           ? status.text(quantityAvailable)
           : status.text}

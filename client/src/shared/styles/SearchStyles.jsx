@@ -18,7 +18,6 @@ export const ProductContainer = styled(Product)`
 
 export const ImgContainer = styled.div`
   height: 70px;
-  position: relative;
   display: flex;
 `;
 
@@ -39,29 +38,23 @@ export const ProductDescription = styled.div`
 export const ProductContent = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
-  gap: 16px;
+  gap: 12px;
   flex: 1 0 0;
-`;
-
-export const ProductTitleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
   align-self: stretch;
 `;
 
-export const ProductDescriptionContainer = styled.div`
+export const VendorTitleContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+`;
+
+export const PriceStockContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 32px;
   align-self: stretch;
-  justify-content: flex-end;
-`;
-
-export const ProductFlexStretch = styled.div`
-  display: flex;
-  flex: 1 0 0;
 `;

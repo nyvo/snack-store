@@ -1,18 +1,14 @@
-import {
-  BodySemiBold,
-  SmallMedium,
-  SmallRegular,
-} from "@/shared/styles/CombinedFontStyles";
+import { BodySemiBold, SmallRegular } from "@/shared/styles/CombinedFontStyles";
 import PropTypes from "prop-types";
 import {
   ProductContainer,
   ProductContent,
-  ProductDescriptionContainer,
-  ProductFlexStretch,
   ProductImg,
   ImgContainer,
-  ProductTitleContainer,
+  VendorTitleContainer,
+  PriceStockContainer,
 } from "@/shared/styles/SearchStyles";
+import { StockStatus } from "@/shared/components/StockStatus";
 
 const SearchResults = ({ products }) => {
   return (
@@ -29,15 +25,16 @@ const SearchResults = ({ products }) => {
               />
             </ImgContainer>
             <ProductContent>
-              <ProductTitleContainer>
-                <ProductFlexStretch>
-                  <SmallRegular>{product.title}</SmallRegular>
-                </ProductFlexStretch>
+              <VendorTitleContainer>
                 <BodySemiBold>{product.vendor}</BodySemiBold>
-              </ProductTitleContainer>
-              <ProductDescriptionContainer>
-                <SmallMedium>${product.variants[0].price}</SmallMedium>
-              </ProductDescriptionContainer>
+                <SmallRegular color="var(--color-600)">
+                  {product.title}
+                </SmallRegular>
+              </VendorTitleContainer>
+              <PriceStockContainer>
+                <BodySemiBold>${product.variants[0].price}</BodySemiBold>
+                <StockStatus product={product} />
+              </PriceStockContainer>
             </ProductContent>
           </ProductContainer>
         );
