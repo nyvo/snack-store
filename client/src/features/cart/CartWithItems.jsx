@@ -4,9 +4,10 @@ import { CloseButton } from "@/shared/icons/CloseButton";
 import CartItem from "./CartItem";
 import {
   LabelRegular,
-  BodyMedium,
   H5Bold,
   SmallMedium,
+  BodySemiBold,
+  SmallRegular,
 } from "@/shared/styles/CombinedFontStyles";
 import { Spinner } from "@/shared/components/Spinner";
 import PropTypes from "prop-types";
@@ -38,12 +39,12 @@ const CartWithItems = ({ closeMenu }) => {
       </ItemsContainer>
 
       <CheckoutContainer>
-        <LabelRegular color="var(--color-800)">
+        <SmallRegular color="var(--color-600)">
           Shipping, taxes or coupons will be calculated at checkout.
-        </LabelRegular>
+        </SmallRegular>
         <CheckoutPriceContainer>
-          <BodyMedium>Subtotal</BodyMedium>
-          <BodyMedium>${subtotal}</BodyMedium>
+          <BodySemiBold>Subtotal</BodySemiBold>
+          <BodySemiBold>${subtotal}</BodySemiBold>
         </CheckoutPriceContainer>
         <CheckoutButton
           onClick={handleCheckout}

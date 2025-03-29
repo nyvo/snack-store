@@ -10,19 +10,23 @@ export const CartProvider = ({ children }) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const { user } = useContext(AuthContext);
+
   const createCartItem = (product) => {
-    const { id, title, description, image, variants } = product;
+    const { id, title, description, vendor, image, variants } = product;
 
     const variantId = variants[0].id;
+    const quantityAvailable = variants[0].quantityAvailable;
 
     return {
       id,
       variantId,
       title,
       description,
+      vendor,
       image,
       price: variants[0].price,
       quantity: 1,
+      quantityAvailable,
     };
   };
 

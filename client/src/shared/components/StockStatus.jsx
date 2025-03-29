@@ -22,21 +22,14 @@ const STOCK_STATUS = {
   },
 };
 
-const ProductShape = PropTypes.shape({
-  variants: PropTypes.arrayOf(
-    PropTypes.shape({
-      quantityAvailable: PropTypes.number.isRequired,
-    })
-  ).isRequired,
-}).isRequired;
+export const StockStatus = ({ product, quantityAvailable }) => {
+  const availableStock =
+    quantityAvailable ?? product?.variants?.[0]?.quantityAvailable ?? 0;
 
-export const StockStatus = ({ product }) => {
-  const quantityAvailable = product.variants?.[0]?.quantityAvailable ?? 0;
   let status = STOCK_STATUS.IN_STOCK;
-
-  if (quantityAvailable === 0) {
+  if (availableStock === 0) {
     status = STOCK_STATUS.OUT_OF_STOCK;
-  } else if (quantityAvailable < 5) {
+  } else if (availableStock < 5) {
     status = STOCK_STATUS.LOW_STOCK;
   }
 
@@ -45,11 +38,23 @@ export const StockStatus = ({ product }) => {
       {status.icon}
       <LabelRegular color="var(--color-600)">
         {typeof status.text === "function"
-          ? status.text(quantityAvailable)
+          ? status.text(availableStock)
           : status.text}
       </LabelRegular>
     </StockStatusWrapper>
   );
+};
+
+// Updated PropTypes to support both product and direct quantityAvailable
+StockStatus.propTypes = {
+  product: PropTypes.shape({
+    variants: PropTypes.arrayOf(
+      PropTypes.shape({
+        quantityAvailable: PropTypes.number,
+      })
+    ),
+  }),
+  quantityAvailable: PropTypes.number, // Optional, for cart items
 };
 
 const StockStatusWrapper = styled.div`
@@ -58,7 +63,3 @@ const StockStatusWrapper = styled.div`
   align-items: center;
   gap: 0.3rem;
 `;
-
-StockStatus.propTypes = {
-  product: ProductShape,
-};

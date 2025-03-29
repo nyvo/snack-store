@@ -47,7 +47,7 @@ const QuantityFrame = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
 `;
 
 const QuantitySelector = styled.div`
