@@ -1,4 +1,8 @@
-import { LabelRegular, SmallMedium } from "@/shared/styles/CombinedFontStyles";
+import {
+  BodySemiBold,
+  SmallMedium,
+  SmallRegular,
+} from "@/shared/styles/CombinedFontStyles";
 import PropTypes from "prop-types";
 import {
   ProductContainer,
@@ -6,6 +10,7 @@ import {
   ProductDescriptionContainer,
   ProductFlexStretch,
   ProductImg,
+  ImgContainer,
   ProductTitleContainer,
 } from "@/shared/styles/SearchStyles";
 
@@ -17,25 +22,20 @@ const SearchResults = ({ products }) => {
 
         return (
           <ProductContainer href={productUrl} key={product.id}>
-            <ProductImg
-              src={product.image} // fallback for missing images
-              alt={product.title}
-            />
+            <ImgContainer>
+              <ProductImg
+                src={product.image} // fallback for missing images
+                alt={product.title}
+              />
+            </ImgContainer>
             <ProductContent>
               <ProductTitleContainer>
                 <ProductFlexStretch>
-                  <SmallMedium>{product.title}</SmallMedium>
+                  <SmallRegular>{product.title}</SmallRegular>
                 </ProductFlexStretch>
-                <LabelRegular color="var(--color-800)">
-                  {product.vendor}
-                </LabelRegular>
+                <BodySemiBold>{product.vendor}</BodySemiBold>
               </ProductTitleContainer>
               <ProductDescriptionContainer>
-                <ProductFlexStretch>
-                  <LabelRegular color="var(--color-500)">
-                    {product.description}
-                  </LabelRegular>
-                </ProductFlexStretch>
                 <SmallMedium>${product.variants[0].price}</SmallMedium>
               </ProductDescriptionContainer>
             </ProductContent>

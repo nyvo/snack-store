@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import {
-  LabelRegular,
   BodySemiBold,
+  SmallRegular,
 } from "@/shared/styles/CombinedFontStyles.jsx";
 import { StockStatus } from "@/shared/components/StockStatus";
 const CategoryCard = ({ product }) => {
@@ -12,16 +12,17 @@ const CategoryCard = ({ product }) => {
     <>
       <CardContainer href={`/product/${product.id}`}>
         <FlexOne>
-          <ProductImg src={product.image} alt={product.title} />
+          <ImgContainer>
+            <ProductImg src={product.image} alt={product.title} />
+          </ImgContainer>
           <PriceContainer>
             <BodySemiBold>${productPrice}</BodySemiBold>
             <StockStatus product={product} />
           </PriceContainer>
         </FlexOne>
         <CardContent>
-          <LabelRegular>{product.vendor}</LabelRegular>
-          <BodySemiBold>{product.title}</BodySemiBold>
-          <LabelRegular>{product.description}</LabelRegular>
+          <BodySemiBold>{product.vendor}</BodySemiBold>
+          <SmallRegular>{product.title}</SmallRegular>
         </CardContent>
       </CardContainer>
     </>
@@ -59,13 +60,17 @@ const CardContent = styled.div`
   align-self: stretch;
 `;
 
+const ImgContainer = styled.div`
+  height: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
 const ProductImg = styled.img`
-  width: 175px;
-  height: auto;
-  min-height: 120px;
-  max-height: 120px;
-  object-fit: cover;
-  border-radius: 15px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 `;
 
 const FlexOne = styled.div`

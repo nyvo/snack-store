@@ -16,11 +16,16 @@ export const ProductContainer = styled(Product)`
   cursor: pointer;
 `;
 
-export const ProductImg = styled.img`
-  width: 70px;
+export const ImgContainer = styled.div`
   height: 70px;
-  border-radius: 8px;
-  object-fit: cover;
+  position: relative;
+  display: flex;
+`;
+
+export const ProductImg = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 `;
 
 export const ProductDescription = styled.div`
@@ -53,6 +58,7 @@ export const ProductDescriptionContainer = styled.div`
   align-items: center;
   gap: 32px;
   align-self: stretch;
+  justify-content: flex-end;
 `;
 
 export const ProductFlexStretch = styled.div`

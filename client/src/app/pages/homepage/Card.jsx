@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import {
-  BodyBold,
-  BodySemiBold,
-  LabelRegular,
-} from "@/shared/styles/CombinedFontStyles";
+import { BodySemiBold, SmallRegular } from "@/shared/styles/CombinedFontStyles";
 import { StockStatus } from "@/shared/components/StockStatus";
 
 const Card = ({ product }) => {
@@ -12,32 +8,30 @@ const Card = ({ product }) => {
   const productPrice = product.variants[0].price;
 
   return (
-    <>
-      <CardContainer href={`/product/${productId}`}>
-        <MainContent>
-          <CardFlexOne>
-            <LabelRegular color="var(--color-700)">
-              {product.vendor}
-            </LabelRegular>
-          </CardFlexOne>
+    <CardContainer href={`/product/${productId}`}>
+      <MainContent>
+        <CardFlexOne>
+          <BodySemiBold>{product.vendor}</BodySemiBold>
+        </CardFlexOne>
 
-          <BodyBold>{product.title}</BodyBold>
-          <ImgContainer>
-            <ProductImg
-              src={product.image || "Error loading image"}
-              alt={product.title}
-            />
-          </ImgContainer>
+        <TitleWrapper>
+          <SmallRegular>{product.title}</SmallRegular>
+        </TitleWrapper>
 
-          <StockStatus product={product} />
-          <LabelRegular color="var(--color-500)">
-            {product.description}
-          </LabelRegular>
-        </MainContent>
+        <ImgContainer>
+          <ProductImg
+            src={product.image || "Error loading image"}
+            alt={product.title}
+          />
+        </ImgContainer>
 
+        <StockStatus product={product} />
+      </MainContent>
+
+      <PriceWrapper>
         <BodySemiBold>${productPrice}</BodySemiBold>
-      </CardContainer>
-    </>
+      </PriceWrapper>
+    </CardContainer>
   );
 };
 
@@ -52,12 +46,10 @@ export default Card;
 const CardContainer = styled.a`
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
   padding: 1rem;
   width: 100%;
   min-width: 225px;
   max-width: 225px;
-  min-height: 325px;
   background-color: var(--color-050);
   border-radius: 16px;
   text-decoration: none;
@@ -69,7 +61,7 @@ const MainContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 `;
 
 const CardFlexOne = styled.div`
@@ -78,18 +70,28 @@ const CardFlexOne = styled.div`
   align-items: center;
 `;
 
+const TitleWrapper = styled.div`
+  min-height: 2.5rem; /* Ensures space for 2 lines if needed */
+  display: flex;
+  align-items: flex-start;
+`;
+
 const ImgContainer = styled.div`
   width: 100%;
-  height: 0;
-  padding-top: 66.7%; /* 3:2 aspect ratio */
+  height: 100px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ProductImg = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+`;
+
+const PriceWrapper = styled.div`
+  margin-top: 0.5rem;
+  text-align: right;
 `;
