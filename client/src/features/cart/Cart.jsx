@@ -19,8 +19,9 @@ const Cart = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
       <MobileSlidingOverlay
         isOpen={isOpen}
         animateOut={animateOut}
-        role="dialog" // Moved from CartWithItems
-        aria-label="Shopping cart" // Moved from CartWithItems
+        role="dialog"
+        aria-label="Shopping cart"
+        onClick={(e) => e.stopPropagation()} // Stop clicks from leaving the overlay
       >
         {cartItems.length === 0 ? (
           <CartEmpty toggleMenu={toggleMenu} closeMenu={closeMenu} />

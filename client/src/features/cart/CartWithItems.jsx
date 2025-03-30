@@ -3,7 +3,6 @@ import { CartContext } from "./CartProvider";
 import { CloseButton } from "@/shared/icons/CloseButton";
 import CartItem from "./CartItem";
 import {
-  LabelRegular,
   H5Bold,
   SmallMedium,
   BodySemiBold,
@@ -29,7 +28,13 @@ const CartWithItems = ({ closeMenu }) => {
     <>
       <CloseOverlayContainer>
         <H5Bold>Your Cart</H5Bold>
-        <CloseButton onClick={closeMenu} aria-label="Close cart" />
+        <CloseButton
+          onClick={(e) => {
+            e.stopPropagation(); // Ensure this doesn’t bubble unnecessarily
+            closeMenu();
+          }}
+          aria-label="Close cart"
+        />
       </CloseOverlayContainer>
 
       <ItemsContainer role="list">

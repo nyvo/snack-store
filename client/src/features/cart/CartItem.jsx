@@ -14,9 +14,14 @@ import { StockStatus } from "@/shared/components/StockStatus";
 const CartItem = ({ item }) => {
   const { removeFromCart } = useContext(CartContext);
 
+  const handleRemove = (e) => {
+    e.stopPropagation(); // Prevent bubbling to parent
+    removeFromCart(item.variantId);
+  };
+
   return (
     <ProductContainer>
-      <CloseButton onClick={() => removeFromCart(item.variantId)} />
+      <CloseButton onClick={handleRemove} />
       <ProductFrame>
         <ImgContainer>
           <ProductImg src={item.image} alt={item.title} />

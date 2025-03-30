@@ -2,7 +2,7 @@
 ☐ Make a strong password check
 ☐ Implement new order card design into code
 ☐ Change the order status symbol based on the status
-☐ Password reset should not redirect to firebase, but to the frontend
+✔ Password reset should not redirect to firebase, but to the frontend @done(25-03-30 11:47)
 
 ☐ Remove artificial delays
 ☐ CartWithItems: fix the loading state, loading state for individual items and loading on the price aswell

@@ -4,6 +4,7 @@ import { LabelMedium } from "@/shared/styles/CombinedFontStyles";
 import { Spinner } from "@/shared/components/Spinner";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+
 const CartQuantity = ({ item }) => {
   const { isUpdating, removeFromCart, updateQuantity } =
     useContext(CartContext);
@@ -16,21 +17,25 @@ const CartQuantity = ({ item }) => {
     }
   };
 
+  const handleDecrease = (e) => {
+    e.stopPropagation(); // Prevent bubbling to parent
+    onQuantityChange(item.quantity - 1);
+  };
+
+  const handleIncrease = (e) => {
+    e.stopPropagation(); // Prevent bubbling to parent
+    onQuantityChange(item.quantity + 1);
+  };
+
   return (
     <QuantityFrame>
-      <QuantitySelector
-        onClick={() => onQuantityChange(item.quantity - 1)}
-        disabled={isUpdating}
-      >
+      <QuantitySelector onClick={handleDecrease} disabled={isUpdating}>
         <img src="/images/minusselector.svg" alt="quantity minus" />
       </QuantitySelector>
       <LabelMedium aria-live="polite" className="min-w-[14px] text-center">
         {isUpdating ? <Spinner color="var(--color-black)" /> : item.quantity}
       </LabelMedium>
-      <QuantitySelector
-        onClick={() => onQuantityChange(item.quantity + 1)}
-        disabled={isUpdating}
-      >
+      <QuantitySelector onClick={handleIncrease} disabled={isUpdating}>
         <img src="/images/plusselector.svg" alt="quantity plus" />
       </QuantitySelector>
     </QuantityFrame>
