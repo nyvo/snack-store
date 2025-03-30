@@ -10,7 +10,12 @@ import {
 } from "@/shared/styles/SearchStyles";
 import { StockStatus } from "@/shared/components/StockStatus";
 
-const SearchResults = ({ products }) => {
+const SearchResults = ({ products, hasNextPage, loadMore }) => {
+  const handleLoadMore = (e) => {
+    e.stopPropagation(); // Prevent click from bubbling up
+    loadMore();
+  };
+
   return (
     <>
       {products.map((product) => {
@@ -39,12 +44,19 @@ const SearchResults = ({ products }) => {
           </ProductContainer>
         );
       })}
+      {hasNextPage && (
+        <button onClick={handleLoadMore} style={{ marginTop: "20px" }}>
+          Load More
+        </button>
+      )}
     </>
   );
 };
 
 SearchResults.propTypes = {
   products: PropTypes.array.isRequired,
+  hasNextPage: PropTypes.bool.isRequired,
+  loadMore: PropTypes.func.isRequired,
 };
 
 export default SearchResults;

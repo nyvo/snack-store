@@ -81,8 +81,8 @@ const productQuery = gql`
 `;
 
 const productSearchQuery = gql`
-  query searchProducts($query: String!) {
-    products(first: 50, query: $query) {
+  query searchProducts($query: String!, $first: Int!, $after: String) {
+    products(first: $first, query: $query, after: $after) {
       edges {
         node {
           id
@@ -110,6 +110,10 @@ const productSearchQuery = gql`
             }
           }
         }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
       }
     }
   }
@@ -465,12 +469,20 @@ app.get("/collections/:id", async (req, res) => {
 
 app.get("/search/:query", async (req, res) => {
   const { query } = req.params;
-  const result = await executeQuery(productSearchQuery, { query });
+  const { first = 10, after } = req.query;
+  const result = await executeQuery(productSearchQuery, {
+    query,
+    first: parseInt(first),
+    after,
+  });
   if (result.success) {
     const formattedProducts = result.data.products.edges.map((edge) =>
       formatProduct(edge.node)
     );
-    res.json(formattedProducts);
+    res.json({
+      products: formattedProducts,
+      pageInfo: result.data.products.pageInfo,
+    });
   } else {
     res.status(500).json({ success: false, error: result.error });
   }

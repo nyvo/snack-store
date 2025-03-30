@@ -5,7 +5,8 @@ import { SearchContext } from "@/app/context/SearchContext";
 import { useContext } from "react";
 
 const SearchResultsWrapper = () => {
-  const { products, loading, error, query } = useContext(SearchContext);
+  const { products, loading, error, query, hasNextPage, loadMore } =
+    useContext(SearchContext);
 
   if (loading) {
     return <LoadingSpinnerWithText />;
@@ -16,7 +17,13 @@ const SearchResultsWrapper = () => {
   if (!loading && products.length === 0 && query.trim().length >= 1) {
     return <ErrorNoResults />;
   }
-  return <SearchResults products={products} />;
+  return (
+    <SearchResults
+      products={products}
+      hasNextPage={hasNextPage}
+      loadMore={loadMore}
+    />
+  );
 };
 
 export default SearchResultsWrapper;

@@ -1,8 +1,6 @@
 ☐ Fix: For Google authentication to work, your apps redirect URI must be registered in both Firebase and Google Cloud Console.
 ☐ Make a strong password check
 ☐ Implement new order card design into code
-☐ Change the order status symbol based on the status
-✔ Password reset should not redirect to firebase, but to the frontend @done(25-03-30 11:47)
 
 ☐ Remove artificial delays
 ☐ CartWithItems: fix the loading state, loading state for individual items and loading on the price aswell

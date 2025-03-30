@@ -50,6 +50,7 @@ export const VendorTitleContainer = styled.div`
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
+  text-align: left;
 `;
 
 export const PriceStockContainer = styled.div`
