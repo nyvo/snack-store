@@ -2,7 +2,6 @@ import SearchPageContent from "./SearchPageContent";
 import Header from "@/shared/components/Header";
 import Footer from "@/shared/components/Footer";
 import { PageContainer, ContentContainer } from "@/shared/styles/LayoutStyles";
-import NewsLetter from "@/shared/components/NewsLetter";
 
 const SearchPage = () => {
   return (
@@ -11,7 +10,7 @@ const SearchPage = () => {
       <ContentContainer>
         <SearchPageContent />
       </ContentContainer>
-      <NewsLetter />
+
       <Footer />
     </PageContainer>
   );

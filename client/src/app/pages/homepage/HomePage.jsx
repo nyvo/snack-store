@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Header from "@/shared/components/Header";
 import Footer from "@/shared/components/Footer";
-import NewsLetter from "@/shared/components/NewsLetter";
+
 import {
   CollectionProvider,
   CollectionContext,
@@ -26,7 +26,7 @@ const HomePage = () => {
           </CollectionProvider>
         ))}
       </ContentContainer>
-      <NewsLetter />
+
       <Footer />
     </PageContainer>
   );

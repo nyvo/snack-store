@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/shared/components/Header";
 import Footer from "@/shared/components/Footer";
-import NewsLetter from "@/shared/components/NewsLetter";
+
 import { CollectionProvider } from "@/app/context/CollectionProvider";
 import CategoryPageContent from "./CategoryPageContent";
 import { CollectionContext } from "@/app/context/CollectionProvider";
@@ -32,7 +32,7 @@ const CategoryPage = () => {
           <SkeletonCollectionPage />
         )}
       </ContentContainer>
-      <NewsLetter />
+
       <Footer />
     </PageContainer>
   );
