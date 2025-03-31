@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FaArrowRight } from "react-icons/fa6";
 
 export const Container = styled.div`
   display: flex;
@@ -39,12 +40,30 @@ export const ListContainerColumn = styled.div`
   gap: 0.5rem;
 `;
 
-export const CollectionTitle = styled.h2`
-  color: var(--color-black);
-  font-family: var(--font-family-basier-square);
-  font-size: var(--font-size-2xl);
-  font-weight: 600;
-  line-height: var(--line-height-135);
-  letter-spacing: var(--letter-spacing-neg-042px);
-  text-decoration: none;
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+export const SeeAllButton = styled.a`
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0; /* Prevent button from shrinking */
+  white-space: nowrap; /* Keep button text on one line */
+`;
+
+export const ArrowRightIcon = styled(FaArrowRight)`
+  color: var(--color-primary-500);
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  flex-grow: 1; /* Allow title to take available space */
 `;
