@@ -39,7 +39,7 @@ export const SlidingOverlay = styled.div`
 
 export const MobileSlidingOverlay = styled.div`
   position: fixed;
-  top: 0; /* Stick to the top of the screen */
+  top: 0;
   left: 0;
   right: 0;
   background: var(--color-white);
@@ -50,13 +50,20 @@ export const MobileSlidingOverlay = styled.div`
   padding: 1rem;
   gap: 2rem;
   overflow-y: auto;
-  width: 100vw; /* Full width */
+  width: 100vw;
   height: 100vh;
   transform: translateX(${({ isOpen }) => (isOpen ? "0" : "100%")});
   animation: ${({ animateOut }) =>
       animateOut ? slideOut : ({ isOpen }) => (isOpen ? slideIn : "none")}
     0.5s ease forwards;
   cursor: auto;
+
+  @media (min-width: 768px) {
+    width: 400px;
+    left: 50%;
+    right: auto;
+    transform: translateX(${({ isOpen }) => (isOpen ? "-50%" : "100%")});
+  }
 `;
 
 export const PopupOverlay = styled.div`

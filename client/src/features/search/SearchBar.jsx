@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { H5SemiBold } from "@/shared/styles/CombinedFontStyles";
 import { CloseButton } from "@/shared/icons/CloseButton";
 import SearchResultsWrapper from "./SearchResultsWrapper";
-import { MobileSlidingOverlay } from "@/shared/styles/OverlayStyles";
+import { MobileSlidingOverlay, Backdrop } from "@/shared/styles/OverlayStyles";
 import { SearchButton } from "@/shared/icons/HeaderIcons";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -34,30 +34,37 @@ const SearchBar = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
         aria-label={isOpen ? "Close search" : "Open search"}
       />
       {isOpen && (
-        <MobileSlidingOverlay isOpen={isOpen} animateOut={animateOut}>
-          <TitleContainer>
-            <H5SemiBold>Search</H5SemiBold>
-            <CloseButton onClick={closeMenu} />
-          </TitleContainer>
+        <>
+          <Backdrop isOpen={isOpen} onClick={closeMenu} />
+          <MobileSlidingOverlay
+            isOpen={isOpen}
+            animateOut={animateOut}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <TitleContainer>
+              <H5SemiBold>Search</H5SemiBold>
+              <CloseButton onClick={closeMenu} />
+            </TitleContainer>
 
-          <SearchForm onSubmit={handleSubmit} role="search">
-            <SearchInputContainer>
-              <StyledSearchButton type="button" />
-              <SearchFormInput
-                type="text"
-                placeholder="Search for a product..."
-                aria-label="Search"
-                value={query}
-                onChange={handleChange}
-                autoFocus
-              />
-            </SearchInputContainer>
-          </SearchForm>
+            <SearchForm onSubmit={handleSubmit} role="search">
+              <SearchInputContainer>
+                <StyledSearchButton type="button" />
+                <SearchFormInput
+                  type="text"
+                  placeholder="Search for a product..."
+                  aria-label="Search"
+                  value={query}
+                  onChange={handleChange}
+                  autoFocus
+                />
+              </SearchInputContainer>
+            </SearchForm>
 
-          <Results>
-            <SearchResultsWrapper />
-          </Results>
-        </MobileSlidingOverlay>
+            <Results>
+              <SearchResultsWrapper />
+            </Results>
+          </MobileSlidingOverlay>
+        </>
       )}
     </>
   );
@@ -99,13 +106,13 @@ const SearchInputContainer = styled.div`
 const StyledSearchButton = styled(SearchButton)`
   position: absolute;
   left: 1rem;
-  pointer-events: none; /* Prevents the button from interfering with input clicks */
+  pointer-events: none;
   color: var(--color-800);
 `;
 
 const SearchFormInput = styled.input`
   display: flex;
-  padding: 8px 16px 8px 3rem; /* Matches AuthInputField, with extra left for icon */
+  padding: 8px 16px 8px 3rem;
   align-items: center;
   width: 100%;
   border-radius: 999px;
@@ -118,7 +125,7 @@ const SearchFormInput = styled.input`
     font-size: var(--Typeface-Size-s, 14px);
     font-style: normal;
     font-weight: 400;
-    line-height: 145%; /* 20.3px */
+    line-height: 145%;
     letter-spacing: 0.07px;
   }
 

@@ -7,7 +7,11 @@ const MobileMenu = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
     <>
       <MenuButton onClick={toggleMenu} />
       {isOpen && (
-        <MobileSlidingOverlay isOpen={isOpen} animateOut={animateOut}>
+        <MobileSlidingOverlay
+          isOpen={isOpen}
+          animateOut={animateOut}
+          onClick={(e) => e.stopPropagation()}
+        >
           <MobileMenuContent toggleMenu={toggleMenu} closeMenu={closeMenu} />
         </MobileSlidingOverlay>
       )}
