@@ -30,7 +30,7 @@ const CartWithItems = ({ closeMenu }) => {
         <H5Bold>Your Cart</H5Bold>
         <CloseButton
           onClick={(e) => {
-            e.stopPropagation(); // Ensure this doesn’t bubble unnecessarily
+            e.stopPropagation();
             closeMenu();
           }}
           aria-label="Close cart"
@@ -70,8 +70,7 @@ CartWithItems.propTypes = {
 
 export default CartWithItems;
 
-/* ----------STYLES---------- NEW */
-
+/* ----------STYLES---------- */
 const CloseOverlayContainer = styled.div`
   display: flex;
   height: 50px;
