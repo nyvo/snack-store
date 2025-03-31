@@ -21,7 +21,7 @@ export const MobileSlidingOverlay = styled.div`
   right: 0;
   background: var(--color-white);
   z-index: 999;
-  display: ${({ isOpen }) => (isOpen ? "flex" : "none")}; /* Add this */
+  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem;
@@ -35,11 +35,19 @@ export const MobileSlidingOverlay = styled.div`
     0.5s ease forwards;
   cursor: auto;
 
+  > * {
+    max-width: 400px; /* Constrain content width */
+    width: 100%;
+    margin: 0 auto; /* Center the content */
+  }
+
   @media (min-width: 768px) {
     width: 400px;
-    left: 50%;
-    right: auto;
-    transform: translateX(${({ isOpen }) => (isOpen ? "-50%" : "100%")});
+    left: auto; /* Remove left positioning */
+    right: 0; /* Align to the right edge */
+    transform: translateX(
+      ${({ isOpen }) => (isOpen ? "0" : "100%")}
+    ); /* Slide from the right */
   }
 `;
 
