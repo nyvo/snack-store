@@ -24,13 +24,26 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Only true until initial auth check
   const isAuthenticated = user !== null;
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
+    // Check for cached user in sessionStorage
+    const cachedUser = sessionStorage.getItem("authUser");
+    if (cachedUser) {
+      setUser(JSON.parse(cachedUser));
+      setLoading(false); // Skip spinner if we have a cached user
+    }
+
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+        sessionStorage.setItem("authUser", JSON.stringify(firebaseUser)); // Cache user in sessionStorage
+      } else {
+        setUser(null);
+        sessionStorage.removeItem("authUser"); // Clear cache if no user
+      }
+      setLoading(false); // Done checking auth state
     });
 
     const handleRedirect = async () => {
@@ -38,6 +51,7 @@ export const AuthProvider = ({ children }) => {
         const result = await getRedirectResult(auth);
         if (result?.user) {
           setUser(result.user);
+          sessionStorage.setItem("authUser", JSON.stringify(result.user)); // Cache redirect user
         }
       } catch (error) {
         console.error("Redirect error:", handleFirebaseError(error));
@@ -48,13 +62,16 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  if (loading) {
-    return (
-      <LoadingOverlay>
-        <Spinner />
-      </LoadingOverlay>
-    );
-  }
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null); // Clear user state
+      sessionStorage.removeItem("authUser"); // Remove cached user on logout
+      return true;
+    } catch (error) {
+      throw handleFirebaseError(error);
+    }
+  };
 
   const login = async (email, password) => {
     try {
@@ -91,15 +108,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      return true;
-    } catch (error) {
-      throw handleFirebaseError(error);
-    }
-  };
-
   const resetPassword = async (email) => {
     try {
       await sendPasswordResetEmail(auth, email);
@@ -111,7 +119,7 @@ export const AuthProvider = ({ children }) => {
 
   const verifyResetCode = async (oobCode) => {
     try {
-      const email = await verifyPasswordResetCode(auth, oobCode); // Fixed typo from '植物' to 'email'
+      const email = await verifyPasswordResetCode(auth, oobCode);
       return email;
     } catch (error) {
       throw handleFirebaseError(error);
@@ -146,12 +154,21 @@ export const AuthProvider = ({ children }) => {
       const result = await getRedirectResult(auth);
       if (result?.user) {
         setUser(result.user);
+        sessionStorage.setItem("authUser", JSON.stringify(result.user));
       }
       return result;
     } catch (error) {
       throw handleFirebaseError(error);
     }
   };
+
+  if (loading) {
+    return (
+      <LoadingOverlay>
+        <Spinner />
+      </LoadingOverlay>
+    );
+  }
 
   return (
     <AuthContext.Provider

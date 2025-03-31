@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useCallback } from "react";
 import { useSyncedCart } from "@/shared/hooks/useSyncedCart";
 import PropTypes from "prop-types";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthProvider";
 
 export const CartContext = createContext();
 

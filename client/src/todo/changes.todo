@@ -1,9 +1,9 @@
 ☐ Fix: For Google authentication to work, your apps redirect URI must be registered in both Firebase and Google Cloud Console.
 ☐ Make a strong password check
-☐ Implement new order card design into code
 
 ☐ Remove artificial delays
 ☐ CartWithItems: fix the loading state, loading state for individual items and loading on the price aswell
+☐ Authcontext spinner should be optimized, with localstorage or show only if loading takes more than 2s
 
 
 DESIGN CHANGES / REFINEMENTS

@@ -23,7 +23,7 @@ import {
   ErrorText,
 } from "@/shared/styles/AuthStyles";
 import { useState, useContext, useEffect } from "react";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@/shared/components/Spinner";
 import { validateEmail } from "@/app/pages/auth/emailErrors";

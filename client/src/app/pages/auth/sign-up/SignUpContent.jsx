@@ -22,7 +22,7 @@ import {
   ErrorText,
   ErrorIcon,
 } from "@/shared/styles/AuthStyles";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthProvider";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "@/shared/components/Spinner";

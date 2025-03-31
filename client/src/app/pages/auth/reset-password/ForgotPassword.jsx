@@ -13,7 +13,7 @@ import {
   SmallMedium,
   SmallRegular,
 } from "@/shared/styles/CombinedFontStyles";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthProvider";
 import { Spinner } from "@/shared/components/Spinner";
 
 const ForgotPassword = () => {

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthProvider";
 import { useCart } from "../cart/useCart";
 import { Spinner } from "@/shared/components/Spinner";
 import HeaderNoNav from "@/shared/components/HeaderNoNav";

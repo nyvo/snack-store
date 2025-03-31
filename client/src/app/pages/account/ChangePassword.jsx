@@ -10,7 +10,7 @@ import {
   LabelRegular,
   SmallMedium,
 } from "@/shared/styles/CombinedFontStyles";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthProvider";
 import { AuthButton } from "@/shared/styles/AuthStyles";
 import PropTypes from "prop-types";
 

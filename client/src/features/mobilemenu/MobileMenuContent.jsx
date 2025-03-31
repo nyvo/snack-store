@@ -3,7 +3,7 @@ import { CloseButton } from "@/shared/icons/CloseButton";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthProvider";
 import { useContext } from "react";
 
 const MobileMenuContent = ({ toggleMenu }) => {
@@ -37,7 +37,6 @@ const MobileMenuContent = ({ toggleMenu }) => {
               >
                 <BodyMedium color="var(--color-950)">Orders</BodyMedium>
               </CategoryItemContainer>
-
             </>
           ) : (
             <>
