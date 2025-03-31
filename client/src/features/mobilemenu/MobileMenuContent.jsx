@@ -37,13 +37,7 @@ const MobileMenuContent = ({ toggleMenu }) => {
               >
                 <BodyMedium color="var(--color-950)">Orders</BodyMedium>
               </CategoryItemContainer>
-              <CategoryItemContainer
-                as={Link}
-                to="/logout"
-                onClick={toggleMenu}
-              >
-                <BodyMedium color="var(--color-950)">Sign Out</BodyMedium>
-              </CategoryItemContainer>
+
             </>
           ) : (
             <>
