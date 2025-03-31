@@ -5,11 +5,15 @@ import { IoCartOutline } from "react-icons/io5";
 import { RiAccountCircleLine } from "react-icons/ri";
 
 const MenuButton = styled(FiMenu)`
-  color: var(--color-black);
+  color: var(--color-950);
   font-size: 24px;
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    display: none; /* Hide on desktop */
   }
 `;
 

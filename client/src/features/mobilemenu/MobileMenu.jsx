@@ -2,6 +2,7 @@ import MobileMenuContent from "./MobileMenuContent";
 import { MobileSlidingOverlay } from "@/shared/styles/OverlayStyles";
 import { MenuButton } from "@/shared/icons/HeaderIcons";
 import PropTypes from "prop-types";
+
 const MobileMenu = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
   return (
     <>

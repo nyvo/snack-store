@@ -1,85 +1,34 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import useMobile from "../hooks/useMobile";
 import SearchBar from "@/features/search/SearchBar";
 import Cart from "@/features/cart/Cart";
 import MobileMenu from "@/features/mobilemenu/MobileMenu";
-import useAnimatedToggle from "../hooks/useAnimatedToggle";
-import useBodyScrollLock from "../hooks/useBodyScrollLock";
-import React from "react";
 
-// Define header items without conditional logic
-const getHeaderItems = (toggleStates) => [
-  {
-    component: (
-      <SearchBar
-        isOpen={toggleStates.search.isOpen}
-        animateOut={toggleStates.search.animateOut}
-        toggleMenu={toggleStates.search.toggleMenu}
-        closeMenu={toggleStates.search.closeMenu}
-      />
-    ),
-    key: "search",
-    ariaLabel: "Toggle search",
-  },
-  {
-    component: (
-      <Cart
-        isOpen={toggleStates.cart.isOpen}
-        animateOut={toggleStates.cart.animateOut}
-        toggleMenu={toggleStates.cart.toggleMenu}
-        closeMenu={toggleStates.cart.closeMenu}
-      />
-    ),
-    key: "cart",
-    ariaLabel: "Toggle cart",
-  },
-  {
-    component: (
-      <MobileMenu
-        isOpen={toggleStates.menu.isOpen}
-        animateOut={toggleStates.menu.animateOut}
-        toggleMenu={toggleStates.menu.toggleMenu}
-        closeMenu={toggleStates.menu.closeMenu}
-      />
-    ),
-    key: "mobile-menu",
-    ariaLabel: "Toggle mobile menu",
-  },
-];
-
+// Simplified Header without custom hooks
 const Header = () => {
-  const isMobile = useMobile();
+  // Manage toggle states directly with useState
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Call hooks at the top level
-  const searchToggle = useAnimatedToggle();
-  const cartToggle = useAnimatedToggle();
-  const menuToggle = useAnimatedToggle();
+  // Toggle functions
+  const toggleSearch = () => setSearchOpen(!searchOpen);
+  const closeSearch = () => setSearchOpen(false);
+  const toggleCart = () => setCartOpen(!cartOpen);
+  const closeCart = () => setCartOpen(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
 
-  // Memoize toggleStates to prevent recreation on every render
-  const toggleStates = React.useMemo(
-    () => ({
-      search: searchToggle,
-      cart: cartToggle,
-      menu: menuToggle,
-    }),
-    [searchToggle, cartToggle, menuToggle]
-  );
-
-  // Lock body scroll when any menu is open
-  useBodyScrollLock(
-    Object.values(toggleStates).some((toggle) => toggle.isOpen)
-  );
-
-  // Memoize header items with stable toggleStates
-  const headerItems = React.useMemo(
-    () =>
-      isMobile
-        ? getHeaderItems(toggleStates)
-        : getHeaderItems(toggleStates).filter(
-            (item) => item.key !== "mobile-menu"
-          ),
-    [isMobile, toggleStates]
-  );
+  useEffect(() => {
+    if (searchOpen || cartOpen || menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [searchOpen, cartOpen, menuOpen]);
 
   return (
     <HeaderContainer role="banner">
@@ -90,16 +39,36 @@ const Header = () => {
       </LogoContainer>
 
       <NavList role="navigation">
-        {headerItems.map((item) => (
-          <ListItem key={item.key}>
-            <IconContainer
-              aria-label={item.ariaLabel}
-              onClick={item.component.props.toggleMenu}
-            >
-              {item.component}
-            </IconContainer>
-          </ListItem>
-        ))}
+        <ListItem>
+          <IconContainer aria-label="Toggle search" onClick={toggleSearch}>
+            <SearchBar
+              isOpen={searchOpen}
+              animateOut={!searchOpen}
+              toggleMenu={toggleSearch}
+              closeMenu={closeSearch}
+            />
+          </IconContainer>
+        </ListItem>
+        <ListItem>
+          <IconContainer aria-label="Toggle cart" onClick={toggleCart}>
+            <Cart
+              isOpen={cartOpen}
+              animateOut={!cartOpen}
+              toggleMenu={toggleCart}
+              closeMenu={closeCart}
+            />
+          </IconContainer>
+        </ListItem>
+        <ListItem>
+          <IconContainer aria-label="Toggle mobile menu" onClick={toggleMenu}>
+            <MobileMenu
+              isOpen={menuOpen}
+              animateOut={!menuOpen}
+              toggleMenu={toggleMenu}
+              closeMenu={closeMenu}
+            />
+          </IconContainer>
+        </ListItem>
       </NavList>
     </HeaderContainer>
   );
