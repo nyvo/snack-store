@@ -24,26 +24,54 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Only true until initial auth check
+  const [loading, setLoading] = useState(true);
   const isAuthenticated = user !== null;
 
   useEffect(() => {
-    // Check for cached user in sessionStorage
-    const cachedUser = sessionStorage.getItem("authUser");
-    if (cachedUser) {
-      setUser(JSON.parse(cachedUser));
-      setLoading(false); // Skip spinner if we have a cached user
+    // Safely check for cached user in sessionStorage
+    let cachedUid = null;
+    try {
+      const cachedData = sessionStorage.getItem("authUser");
+      if (cachedData) {
+        cachedUid = JSON.parse(cachedData).uid;
+      }
+    } catch (e) {
+      console.warn("sessionStorage unavailable or corrupted:", e);
     }
 
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      let currentCachedUid = null;
+      try {
+        const cachedData = sessionStorage.getItem("authUser");
+        if (cachedData) {
+          currentCachedUid = JSON.parse(cachedData).uid;
+        }
+      } catch (e) {
+        console.warn("sessionStorage unavailable:", e);
+      }
+
       if (firebaseUser) {
-        setUser(firebaseUser);
-        sessionStorage.setItem("authUser", JSON.stringify(firebaseUser)); // Cache user in sessionStorage
+        // Only update if the cached UID differs or doesn’t exist
+        if (!currentCachedUid || currentCachedUid !== firebaseUser.uid) {
+          setUser(firebaseUser);
+          try {
+            sessionStorage.setItem(
+              "authUser",
+              JSON.stringify({ uid: firebaseUser.uid })
+            );
+          } catch (e) {
+            console.warn("Failed to set sessionStorage:", e);
+          }
+        }
       } else {
         setUser(null);
-        sessionStorage.removeItem("authUser"); // Clear cache if no user
+        try {
+          sessionStorage.removeItem("authUser");
+        } catch (e) {
+          console.warn("Failed to clear sessionStorage:", e);
+        }
       }
-      setLoading(false); // Done checking auth state
+      setLoading(false);
     });
 
     const handleRedirect = async () => {
@@ -51,7 +79,14 @@ export const AuthProvider = ({ children }) => {
         const result = await getRedirectResult(auth);
         if (result?.user) {
           setUser(result.user);
-          sessionStorage.setItem("authUser", JSON.stringify(result.user)); // Cache redirect user
+          try {
+            sessionStorage.setItem(
+              "authUser",
+              JSON.stringify({ uid: result.user.uid })
+            );
+          } catch (e) {
+            console.warn("Failed to set sessionStorage:", e);
+          }
         }
       } catch (error) {
         console.error("Redirect error:", handleFirebaseError(error));
@@ -59,14 +94,23 @@ export const AuthProvider = ({ children }) => {
     };
     handleRedirect();
 
+    // If we have a cached UID, set loading to false early
+    if (cachedUid) {
+      setLoading(false);
+    }
+
     return () => unsubscribe();
   }, []);
 
   const logout = async () => {
     try {
       await signOut(auth);
-      setUser(null); // Clear user state
-      sessionStorage.removeItem("authUser"); // Remove cached user on logout
+      setUser(null);
+      try {
+        sessionStorage.removeItem("authUser");
+      } catch (e) {
+        console.warn("Failed to clear sessionStorage:", e);
+      }
       return true;
     } catch (error) {
       throw handleFirebaseError(error);
@@ -154,7 +198,14 @@ export const AuthProvider = ({ children }) => {
       const result = await getRedirectResult(auth);
       if (result?.user) {
         setUser(result.user);
-        sessionStorage.setItem("authUser", JSON.stringify(result.user));
+        try {
+          sessionStorage.setItem(
+            "authUser",
+            JSON.stringify({ uid: result.user.uid })
+          );
+        } catch (e) {
+          console.warn("Failed to set sessionStorage:", e);
+        }
       }
       return result;
     } catch (error) {
