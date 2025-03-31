@@ -7,34 +7,11 @@ export const Backdrop = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3); /* Semi-transparent black */
-  z-index: 998; /* One level below the cart */
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 998;
   opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
   transition: opacity 0.5s ease;
-`;
-
-export const SlidingOverlay = styled.div`
-  position: fixed;
-  top: 0; /* Stick to the top of the screen */
-  left: 0;
-  right: 0;
-  background: var(--color-white);
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem;
-  gap: 2rem;
-  overflow-y: auto;
-  width: 100vw; /* Full width */
-  min-height: 50vh;
-  height: 90vh; /* Set to 70% of the viewport height */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  transform: translateX(${({ isOpen }) => (isOpen ? "0" : "100%")});
-  animation: ${({ animateOut }) =>
-      animateOut ? slideOut : ({ isOpen }) => (isOpen ? slideIn : "none")}
-    0.5s ease forwards;
 `;
 
 export const MobileSlidingOverlay = styled.div`
@@ -44,7 +21,7 @@ export const MobileSlidingOverlay = styled.div`
   right: 0;
   background: var(--color-white);
   z-index: 999;
-  display: flex;
+  display: ${({ isOpen }) => (isOpen ? "flex" : "none")}; /* Add this */
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem;

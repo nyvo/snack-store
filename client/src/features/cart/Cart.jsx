@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import CartEmpty from "./CartEmpty";
 import CartWithItems from "./CartWithItems";
 import { CartContext } from "@/features/cart/CartProvider";
-import { MobileSlidingOverlay } from "@/shared/styles/OverlayStyles";
+import { MobileSlidingOverlay, Backdrop } from "@/shared/styles/OverlayStyles";
 import CartIconItemCount from "./CartIconItemCount";
 import PropTypes from "prop-types";
 
@@ -28,19 +28,24 @@ const Cart = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
         ariaExpanded={isOpen}
         aria-label={isOpen ? "Close cart" : "Open cart"}
       />
-      <MobileSlidingOverlay
-        isOpen={isOpen}
-        animateOut={animateOut}
-        role="dialog"
-        aria-label="Shopping cart"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {cartItems.length === 0 ? (
-          <CartEmpty toggleMenu={toggleMenu} closeMenu={closeMenu} />
-        ) : (
-          <CartWithItems toggleMenu={toggleMenu} closeMenu={closeMenu} />
-        )}
-      </MobileSlidingOverlay>
+      {isOpen && (
+        <>
+          <Backdrop isOpen={isOpen} onClick={closeMenu} />
+          <MobileSlidingOverlay
+            isOpen={isOpen}
+            animateOut={animateOut}
+            role="dialog"
+            aria-label="Shopping cart"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {cartItems.length === 0 ? (
+              <CartEmpty toggleMenu={toggleMenu} closeMenu={closeMenu} />
+            ) : (
+              <CartWithItems toggleMenu={toggleMenu} closeMenu={closeMenu} />
+            )}
+          </MobileSlidingOverlay>
+        </>
+      )}
     </>
   );
 };
