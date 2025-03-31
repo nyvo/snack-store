@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import Header from "@/shared/components/Header";
 import Footer from "@/shared/components/Footer";
-
 import {
   CollectionProvider,
   CollectionContext,
@@ -26,7 +25,6 @@ const HomePage = () => {
           </CollectionProvider>
         ))}
       </ContentContainer>
-
       <Footer />
     </PageContainer>
   );

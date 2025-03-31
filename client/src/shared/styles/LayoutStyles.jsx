@@ -12,7 +12,7 @@ export const ContentContainer = styled.div`
   flex-direction: column;
   max-width: 390px;
   padding: 1rem;
-  gap: 1rem;
+  gap: 2rem;
   flex: 1;
 `;
 
@@ -27,6 +27,7 @@ export const ContentContainerBigGap = styled.div`
 
 export const SpinnerContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;

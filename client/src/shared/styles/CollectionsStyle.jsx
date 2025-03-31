@@ -48,15 +48,3 @@ export const CollectionTitle = styled.h2`
   letter-spacing: var(--letter-spacing-neg-042px);
   text-decoration: none;
 `;
-
-export const CollectionLink = styled.a`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  align-self: flex-start;
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid var(--color-black);
-  color: var(--color-white);
-`;
