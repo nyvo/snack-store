@@ -1,4 +1,4 @@
-☐ Fix: For Google authentication to work, your apps redirect URI must be registered in both Firebase and Google Cloud Console.
+☐ Fix: For Google authentication to work, your apps redirect URL must be registered in both Firebase and Google Cloud Console.
 ☐ Make a strong password check
 
 ☐ Remove artificial delays

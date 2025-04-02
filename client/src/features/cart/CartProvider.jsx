@@ -7,7 +7,6 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useSyncedCart([]);
-  const [isUpdating, setIsUpdating] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const { user } = useContext(AuthContext);
 
@@ -53,27 +52,20 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateQuantity = (variantId, quantity) => {
-    setIsUpdating(true);
-    const timeoutId = setTimeout(() => {
-      setCartItems((prevItems) => {
-        try {
-          const updatedItems = prevItems.map((item) => {
-            if (item.variantId === variantId) {
-              return { ...item, quantity };
-            }
-            return item;
-          });
-          return updatedItems;
-        } catch (error) {
-          console.error("Failed to update quantity", error);
-          return prevItems;
-        } finally {
-          setIsUpdating(false);
-        }
-      });
-    }, 300);
-
-    return () => clearTimeout(timeoutId);
+    setCartItems((prevItems) => {
+      try {
+        const updatedItems = prevItems.map((item) => {
+          if (item.variantId === variantId) {
+            return { ...item, quantity };
+          }
+          return item;
+        });
+        return updatedItems;
+      } catch (error) {
+        console.error("Failed to update quantity", error);
+        return prevItems;
+      }
+    });
   };
 
   const handleCheckout = async () => {
@@ -135,7 +127,6 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         updateQuantity,
-        isUpdating,
         handleCheckout,
         isCheckingOut,
         createCartItem,
