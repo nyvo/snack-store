@@ -13,3 +13,4 @@ DESIGN CHANGES / REFINEMENTS
 ☐ Check scaling for overlay layout (it should be responsive)
 ☐ If scaling down too much check for layout breaks, overlays too
 ☐ Redesign the mobile menu
+☐ Slide out animation is not working for header icons  
