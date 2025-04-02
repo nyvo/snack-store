@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import { CartContext } from "./CartProvider";
 import { LabelMedium } from "@/shared/styles/CombinedFontStyles";
-import { Spinner } from "@/shared/components/Spinner";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const CartQuantity = ({ item }) => {
-  const { isUpdating, removeFromCart, updateQuantity } =
-    useContext(CartContext);
+  const { removeFromCart, updateQuantity } = useContext(CartContext);
 
   const onQuantityChange = (newQuantity) => {
     if (newQuantity <= 0) {
@@ -29,13 +27,11 @@ const CartQuantity = ({ item }) => {
 
   return (
     <QuantityFrame>
-      <QuantitySelector onClick={handleDecrease} disabled={isUpdating}>
+      <QuantitySelector onClick={handleDecrease}>
         <img src="/images/minusselector.svg" alt="quantity minus" />
       </QuantitySelector>
-      <LabelMedium aria-live="polite" className="min-w-[14px] text-center">
-        {isUpdating ? <Spinner color="var(--color-black)" /> : item.quantity}
-      </LabelMedium>
-      <QuantitySelector onClick={handleIncrease} disabled={isUpdating}>
+      <LabelMedium>{item.quantity}</LabelMedium>
+      <QuantitySelector onClick={handleIncrease}>
         <img src="/images/plusselector.svg" alt="quantity plus" />
       </QuantitySelector>
     </QuantityFrame>
