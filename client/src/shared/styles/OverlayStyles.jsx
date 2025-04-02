@@ -43,6 +43,8 @@ export const MobileSlidingOverlay = styled.div`
     max-width: 400px;
     width: 100%;
     margin: 0 auto;
+    pointer-events: auto; /* Ensure children are interactable */
+    user-select: text; /* Ensure text in children is selectable */
   }
 
   @media (min-width: 768px) {
