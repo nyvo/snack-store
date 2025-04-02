@@ -13,6 +13,7 @@ export const Backdrop = styled.div`
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
   transition: opacity 0.5s ease,
     visibility 0s ${({ isOpen }) => (isOpen ? "0s" : "0.5s")};
+  cursor: ${({ isOpen }) => (isOpen ? "auto" : "default")}; /* Optional */
 `;
 
 export const MobileSlidingOverlay = styled.div`
@@ -31,10 +32,12 @@ export const MobileSlidingOverlay = styled.div`
   width: 100vw;
   height: 100vh;
   animation: ${({ isOpen }) => (isOpen ? slideIn : slideOut)} 0.6s ease-in-out
-    forwards; /* Slower, smoother */
+    forwards;
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
   pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
-  transition: visibility 0s ${({ isOpen }) => (isOpen ? "0s" : "0.6s")}; /* Match animation duration */
+  cursor: ${({ isOpen }) =>
+    isOpen ? "auto" : "default"}; /* Explicit cursor control */
+  transition: visibility 0s ${({ isOpen }) => (isOpen ? "0s" : "0.6s")};
 
   > * {
     max-width: 400px;
