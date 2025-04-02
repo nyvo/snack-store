@@ -5,15 +5,12 @@ import Cart from "@/features/cart/Cart";
 import MobileMenu from "@/features/mobilemenu/MobileMenu";
 import useMobile from "@/shared/hooks/useMobile";
 
-// Simplified Header without custom hooks
 const Header = () => {
-  // Manage toggle states directly with useState
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useMobile();
 
-  // Toggle functions
   const toggleSearch = () => setSearchOpen(!searchOpen);
   const closeSearch = () => setSearchOpen(false);
   const toggleCart = () => setCartOpen(!cartOpen);
@@ -45,7 +42,6 @@ const Header = () => {
           <IconContainer aria-label="Toggle search" onClick={toggleSearch}>
             <SearchBar
               isOpen={searchOpen}
-              animateOut={!searchOpen}
               toggleMenu={toggleSearch}
               closeMenu={closeSearch}
             />
@@ -55,19 +51,16 @@ const Header = () => {
           <IconContainer aria-label="Toggle cart" onClick={toggleCart}>
             <Cart
               isOpen={cartOpen}
-              animateOut={!cartOpen}
               toggleMenu={toggleCart}
               closeMenu={closeCart}
             />
           </IconContainer>
         </ListItem>
-
         {isMobile && (
           <ListItem>
             <IconContainer aria-label="Toggle mobile menu" onClick={toggleMenu}>
               <MobileMenu
                 isOpen={menuOpen}
-                animateOut={!menuOpen}
                 toggleMenu={toggleMenu}
                 closeMenu={closeMenu}
               />
@@ -82,7 +75,6 @@ const Header = () => {
 export default Header;
 
 /* ----------STYLES---------- */
-
 const HeaderContainer = styled.header`
   display: flex;
   height: 50px;

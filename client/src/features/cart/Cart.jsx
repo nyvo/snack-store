@@ -6,18 +6,16 @@ import { MobileSlidingOverlay, Backdrop } from "@/shared/styles/OverlayStyles";
 import CartIconItemCount from "./CartIconItemCount";
 import PropTypes from "prop-types";
 
-const Cart = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
+const Cart = ({ isOpen, toggleMenu, closeMenu }) => {
   const { cartItems } = useContext(CartContext);
   const [prevCartItemsLength, setPrevCartItemsLength] = useState(
     cartItems.length
   );
 
   useEffect(() => {
-    // Only close the overlay if the cart transitions from having items to being empty
     if (prevCartItemsLength > 0 && cartItems.length === 0 && isOpen) {
       closeMenu();
     }
-    // Update prevCartItemsLength after checking the condition
     setPrevCartItemsLength(cartItems.length);
   }, [cartItems.length, isOpen, closeMenu, prevCartItemsLength]);
 
@@ -28,31 +26,25 @@ const Cart = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
         ariaExpanded={isOpen}
         aria-label={isOpen ? "Close cart" : "Open cart"}
       />
-      {isOpen && (
-        <>
-          <Backdrop isOpen={isOpen} onClick={closeMenu} />
-          <MobileSlidingOverlay
-            isOpen={isOpen}
-            animateOut={animateOut}
-            role="dialog"
-            aria-label="Shopping cart"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {cartItems.length === 0 ? (
-              <CartEmpty toggleMenu={toggleMenu} closeMenu={closeMenu} />
-            ) : (
-              <CartWithItems toggleMenu={toggleMenu} closeMenu={closeMenu} />
-            )}
-          </MobileSlidingOverlay>
-        </>
-      )}
+      <Backdrop isOpen={isOpen} onClick={closeMenu} />
+      <MobileSlidingOverlay
+        isOpen={isOpen}
+        role="dialog"
+        aria-label="Shopping cart"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {cartItems.length === 0 ? (
+          <CartEmpty toggleMenu={toggleMenu} closeMenu={closeMenu} />
+        ) : (
+          <CartWithItems toggleMenu={toggleMenu} closeMenu={closeMenu} />
+        )}
+      </MobileSlidingOverlay>
     </>
   );
 };
 
 Cart.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  animateOut: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired,
   closeMenu: PropTypes.func.isRequired,
 };

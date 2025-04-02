@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { SearchContext } from "@/app/context/SearchContext";
 import styled from "styled-components";
 
-const SearchBar = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
+const SearchBar = ({ isOpen, toggleMenu, closeMenu }) => {
   const navigate = useNavigate();
   const { query, setQuery } = useContext(SearchContext);
 
@@ -33,52 +33,45 @@ const SearchBar = ({ isOpen, animateOut, toggleMenu, closeMenu }) => {
         aria-expanded={isOpen}
         aria-label={isOpen ? "Close search" : "Open search"}
       />
-      {isOpen && (
-        <>
-          <Backdrop isOpen={isOpen} onClick={closeMenu} />
-          <MobileSlidingOverlay
-            isOpen={isOpen}
-            animateOut={animateOut}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <TitleContainer>
-              <H5SemiBold>Search</H5SemiBold>
-              <CloseButton onClick={closeMenu} />
-            </TitleContainer>
-
-            <SearchForm onSubmit={handleSubmit} role="search">
-              <SearchInputContainer>
-                <StyledSearchButton type="button" />
-                <SearchFormInput
-                  type="text"
-                  placeholder="Search for a product..."
-                  aria-label="Search"
-                  value={query}
-                  onChange={handleChange}
-                  autoFocus
-                />
-              </SearchInputContainer>
-            </SearchForm>
-
-            <Results>
-              <SearchResultsWrapper />
-            </Results>
-          </MobileSlidingOverlay>
-        </>
-      )}
+      <Backdrop isOpen={isOpen} onClick={closeMenu} />
+      <MobileSlidingOverlay
+        isOpen={isOpen}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <TitleContainer>
+          <H5SemiBold>Search</H5SemiBold>
+          <CloseButton onClick={closeMenu} />
+        </TitleContainer>
+        <SearchForm onSubmit={handleSubmit} role="search">
+          <SearchInputContainer>
+            <StyledSearchButton type="button" />
+            <SearchFormInput
+              type="text"
+              placeholder="Search for a product..."
+              aria-label="Search"
+              value={query}
+              onChange={handleChange}
+              autoFocus
+            />
+          </SearchInputContainer>
+        </SearchForm>
+        <Results>
+          <SearchResultsWrapper />
+        </Results>
+      </MobileSlidingOverlay>
     </>
   );
 };
 
 SearchBar.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  animateOut: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired,
   closeMenu: PropTypes.func.isRequired,
 };
 
 export default SearchBar;
 
+// Styles unchanged
 const TitleContainer = styled.div`
   display: flex;
   height: 50px;

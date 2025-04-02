@@ -14,3 +14,4 @@ DESIGN CHANGES / REFINEMENTS
 ☐ If scaling down too much check for layout breaks, overlays too
 ☐ Redesign the mobile menu
 ☐ Slide out animation is not working for header icons  
+☐ Protection routes for authentication not working currently

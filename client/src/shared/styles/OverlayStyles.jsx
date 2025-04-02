@@ -11,7 +11,8 @@ export const Backdrop = styled.div`
   z-index: 998;
   opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
   visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease,
+    visibility 0s ${({ isOpen }) => (isOpen ? "0s" : "0.5s")};
 `;
 
 export const MobileSlidingOverlay = styled.div`
@@ -21,7 +22,7 @@ export const MobileSlidingOverlay = styled.div`
   right: 0;
   background: var(--color-white);
   z-index: 999;
-  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem;
@@ -29,25 +30,22 @@ export const MobileSlidingOverlay = styled.div`
   overflow-y: auto;
   width: 100vw;
   height: 100vh;
-  transform: translateX(${({ isOpen }) => (isOpen ? "0" : "100%")});
-  animation: ${({ animateOut }) =>
-      animateOut ? slideOut : ({ isOpen }) => (isOpen ? slideIn : "none")}
-    0.5s ease forwards;
-  cursor: auto;
+  animation: ${({ isOpen }) => (isOpen ? slideIn : slideOut)} 0.6s ease-in-out
+    forwards; /* Slower, smoother */
+  visibility: ${({ isOpen }) => (isOpen ? "visible" : "hidden")};
+  pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
+  transition: visibility 0s ${({ isOpen }) => (isOpen ? "0s" : "0.6s")}; /* Match animation duration */
 
   > * {
-    max-width: 400px; /* Constrain content width */
+    max-width: 400px;
     width: 100%;
-    margin: 0 auto; /* Center the content */
+    margin: 0 auto;
   }
 
   @media (min-width: 768px) {
     width: 400px;
-    left: auto; /* Remove left positioning */
-    right: 0; /* Align to the right edge */
-    transform: translateX(
-      ${({ isOpen }) => (isOpen ? "0" : "100%")}
-    ); /* Slide from the right */
+    left: auto;
+    right: 0;
   }
 `;
 
