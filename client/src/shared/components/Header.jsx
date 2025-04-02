@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SearchBar from "@/features/search/SearchBar";
 import Cart from "@/features/cart/Cart";
 import MobileMenu from "@/features/mobilemenu/MobileMenu";
+import useMobile from "@/shared/hooks/useMobile";
 
 // Simplified Header without custom hooks
 const Header = () => {
@@ -10,6 +11,7 @@ const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const isMobile = useMobile();
 
   // Toggle functions
   const toggleSearch = () => setSearchOpen(!searchOpen);
@@ -59,16 +61,19 @@ const Header = () => {
             />
           </IconContainer>
         </ListItem>
-        <ListItem>
-          <IconContainer aria-label="Toggle mobile menu" onClick={toggleMenu}>
-            <MobileMenu
-              isOpen={menuOpen}
-              animateOut={!menuOpen}
-              toggleMenu={toggleMenu}
-              closeMenu={closeMenu}
-            />
-          </IconContainer>
-        </ListItem>
+
+        {isMobile && (
+          <ListItem>
+            <IconContainer aria-label="Toggle mobile menu" onClick={toggleMenu}>
+              <MobileMenu
+                isOpen={menuOpen}
+                animateOut={!menuOpen}
+                toggleMenu={toggleMenu}
+                closeMenu={closeMenu}
+              />
+            </IconContainer>
+          </ListItem>
+        )}
       </NavList>
     </HeaderContainer>
   );
