@@ -42,6 +42,17 @@ const GlobalStyle = createGlobalStyle`
 --color-secondary-800: #1956B4;
 --color-secondary-900: #1B4A8D;
 
+// Accent color
+--color-accent-100: #ffffc2;
+--color-accent-200: #fffc89;
+--color-accent-300: #fff345;
+--color-accent-400: #fce313;
+--color-accent-500: #ecca06;
+--color-accent-600: #cc9e02;
+--color-accent-700: #a27106;
+--color-accent-800: #86590d;
+--color-accent-900: #432605;
+
 // Success
 --color-success-100: #F3FAF3; 
 --color-success-200: #C8EAC9; 
