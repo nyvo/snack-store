@@ -85,7 +85,7 @@ export default FooterMobile;
 
 const FooterContainer = styled.footer`
   display: flex;
-  padding: 16px;
+  padding: 2rem 1rem;
   flex-direction: column;
   align-items: center;
   gap: 32px;
