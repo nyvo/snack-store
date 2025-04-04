@@ -17,6 +17,7 @@ import ResetPasswordContainer from "@/app/pages/auth/reset-password/ResetPasswor
 import OrderConfirmPage from "@/features/orderconfirmation/OrderConfirmPage";
 import ProtectedRoute from "@/app/pages/auth/ProtectedRoute";
 import PublicRoute from "@/app/pages/auth/PublicRoute";
+import FooterMobile from "@/shared/components/FooterMobile";
 
 function App() {
   return (
@@ -26,55 +27,48 @@ function App() {
           <SearchProvider>
             <CollectionProvider>
               <GlobalStyle />
-              <AppContainer>
-                <Router>
-                  <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route
-                      path="/product/:productId"
-                      element={<ProductPage />}
-                    />
-                    <Route path="/search/:query?" element={<SearchPage />} />
-                    <Route
-                      path="/signin"
-                      element={
-                        <PublicRoute>
-                          <SignInPage />
-                        </PublicRoute>
-                      }
-                    />
-                    <Route
-                      path="/signup"
-                      element={
-                        <PublicRoute>
-                          <SignUpPage />
-                        </PublicRoute>
-                      }
-                    />
-                    <Route path="/:collectionType" element={<CategoryPage />} />
-                    <Route
-                      path="/account"
-                      element={
-                        <ProtectedRoute>
-                          <AccountHome />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path="/forgot-password"
-                      element={<ForgotPasswordContainer />}
-                    />
-                    <Route
-                      path="/reset-password"
-                      element={<ResetPasswordContainer />}
-                    />
-                    <Route
-                      path="/order/success"
-                      element={<OrderConfirmPage />}
-                    />
-                  </Routes>
-                </Router>
-              </AppContainer>
+              <Router>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/product/:productId" element={<ProductPage />} />
+                  <Route path="/search/:query?" element={<SearchPage />} />
+                  <Route
+                    path="/signin"
+                    element={
+                      <PublicRoute>
+                        <SignInPage />
+                      </PublicRoute>
+                    }
+                  />
+                  <Route
+                    path="/signup"
+                    element={
+                      <PublicRoute>
+                        <SignUpPage />
+                      </PublicRoute>
+                    }
+                  />
+                  <Route path="/:collectionType" element={<CategoryPage />} />
+                  <Route
+                    path="/account"
+                    element={
+                      <ProtectedRoute>
+                        <AccountHome />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/forgot-password"
+                    element={<ForgotPasswordContainer />}
+                  />
+                  <Route
+                    path="/reset-password"
+                    element={<ResetPasswordContainer />}
+                  />
+                  <Route path="/order/success" element={<OrderConfirmPage />} />
+                  <Route path="/footermobile" element={<FooterMobile />} />
+                </Routes>
+              </Router>
             </CollectionProvider>
           </SearchProvider>
         </CartProvider>
@@ -86,10 +80,3 @@ function App() {
 export default App;
 
 /* ----------STYLES---------- */
-
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  max-width: 390px;
-`;

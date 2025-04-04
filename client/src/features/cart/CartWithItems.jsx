@@ -96,6 +96,7 @@ const CheckoutContainer = styled.div`
   align-items: flex-start;
   gap: 16px;
   align-self: stretch;
+  text-align: left;
 `;
 
 const CheckoutPriceContainer = styled.div`
@@ -113,5 +114,6 @@ const CheckoutButton = styled.button`
   align-items: center;
   align-self: stretch;
   border-radius: 999px;
+  height: 40px;
   background: var(--color-primary-500, #4362ee);
 `;

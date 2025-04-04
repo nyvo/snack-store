@@ -83,6 +83,8 @@ const HeaderContainer = styled.header`
   align-items: center;
   flex-shrink: 0;
   align-self: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 const LogoContainer = styled.div`
