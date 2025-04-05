@@ -5,7 +5,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { RiAccountCircleLine } from "react-icons/ri";
 
 const MenuButton = styled(FiMenu)`
-  color: var(--color-white);
+  color: var(--color-black);
   font-size: 24px;
 
   &:hover {
@@ -18,7 +18,7 @@ const MenuButton = styled(FiMenu)`
 `;
 
 const SearchButton = styled(IoIosSearch)`
-  color: var(--color-white);
+  color: var(--color-black);
   font-size: 24px;
 
   &:hover {
@@ -27,7 +27,7 @@ const SearchButton = styled(IoIosSearch)`
 `;
 
 const CartButton = styled(IoCartOutline)`
-  color: var(--color-white);
+  color: var(--color-black);
   font-size: 24px;
 
   &:hover {
@@ -36,7 +36,7 @@ const CartButton = styled(IoCartOutline)`
 `;
 
 const AccountButton = styled(RiAccountCircleLine)`
-  color: var(--color-white);
+  color: var(--color-black);
   font-size: 24px;
 
   &:hover {

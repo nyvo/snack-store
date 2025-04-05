@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 export const FullWidthContainer = styled.div`
   width: 100%;
-  background-color: var(--color-950); // Add your desired background color
+  background-color: var(
+    --color-primary-900
+  ); // Add your desired background color
 `;
 
 export const PageContainer = styled.div`

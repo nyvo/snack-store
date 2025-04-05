@@ -5,6 +5,7 @@ import {
   LabelRegular,
   SmallMedium,
 } from "../styles/CombinedFontStyles";
+import { Link } from "react-router-dom";
 
 const FooterMobile = () => {
   return (
@@ -15,7 +16,9 @@ const FooterMobile = () => {
             <BodySemiBold color="var(--color-primary-500)">About</BodySemiBold>
             <LinksColumn>
               <SmallMedium color="var(--color-white)">Oslo, Norway</SmallMedium>
-              <SmallMedium color="var(--color-white)">+47 95133850</SmallMedium>
+              <SmallMedium to="/" color="var(--color-white)">
+                +47 95133850
+              </SmallMedium>
               <SmallMedium color="var(--color-white)">
                 store@mail.com
               </SmallMedium>
@@ -27,12 +30,16 @@ const FooterMobile = () => {
               Support
             </BodySemiBold>
             <LinksColumn>
-              <SmallMedium color="var(--color-white)">Contact us</SmallMedium>
-              <SmallMedium color="var(--color-white)">FAQ</SmallMedium>
-              <SmallMedium color="var(--color-white)">
+              <SmallMedium as={Link} to="/" color="var(--color-white)">
+                Contact us
+              </SmallMedium>
+              <SmallMedium as={Link} to="/" color="var(--color-white)">
+                FAQ
+              </SmallMedium>
+              <SmallMedium as={Link} to="/" color="var(--color-white)">
                 Privacy Policy
               </SmallMedium>
-              <SmallMedium color="var(--color-white)">
+              <SmallMedium as={Link} to="/" color="var(--color-white)">
                 Shipping & Returns
               </SmallMedium>
             </LinksColumn>

@@ -21,7 +21,7 @@ const HomePage = () => {
 
   return (
     <>
-      <FullWidthContainer>
+      <FullWidthContainer style={{ backgroundColor: "var(--color-pwhite)" }}>
         <Header />
       </FullWidthContainer>
       <PageContainer>

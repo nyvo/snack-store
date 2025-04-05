@@ -1,4 +1,4 @@
-import { BodyMedium, H5Bold } from "@/shared/styles/CombinedFontStyles";
+import { BodyMedium } from "@/shared/styles/CombinedFontStyles";
 import { CloseButton } from "@/shared/icons/CloseButton";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -10,84 +10,63 @@ const MobileMenuContent = ({ toggleMenu }) => {
   const { isAuthenticated } = useContext(AuthContext);
 
   const collections = [
-    { id: 1, title: "Keyboards", handle: "keyboards" },
-    { id: 2, title: "Keycaps", handle: "keycaps" },
-    { id: 3, title: "Switches", handle: "switches" },
-    { id: 4, title: "Accessories", handle: "accessories" },
+    { id: 1, title: "Drinks", handle: "drinks" },
+    { id: 2, title: "Snacks", handle: "snacks" },
+    { id: 3, title: "Seasoning", handle: "seasoning" },
   ];
 
   return (
     <>
       <CloseOverlayContainer>
-        <CloseButton onClick={toggleMenu} />
+        <CloseButton
+          onClick={toggleMenu}
+          style={{ color: "var(--color-white)" }}
+        />
       </CloseOverlayContainer>
 
-      <SectionContainer>
-        <H5Bold color="var(--color-primary-500)">Account</H5Bold>
-        <SectionCard>
-          {isAuthenticated ? (
-            <>
-              <CategoryItemContainer as={Link} to="/" onClick={toggleMenu}>
-                <BodyMedium color="var(--color-950)">Home</BodyMedium>
-              </CategoryItemContainer>
-              <CategoryItemContainer
-                as={Link}
-                to="/orders"
-                onClick={toggleMenu}
-              >
-                <BodyMedium color="var(--color-950)">Orders</BodyMedium>
-              </CategoryItemContainer>
-            </>
-          ) : (
-            <>
-              <CategoryItemContainer
-                as={Link}
-                to="/sign-in"
-                onClick={toggleMenu}
-              >
-                <BodyMedium color="var(--color-950)">Sign In</BodyMedium>
-              </CategoryItemContainer>
-              <CategoryItemContainer
-                as={Link}
-                to="/sign-up"
-                onClick={toggleMenu}
-              >
-                <BodyMedium color="var(--color-950)">Create Account</BodyMedium>
-              </CategoryItemContainer>
-            </>
-          )}
-        </SectionCard>
-      </SectionContainer>
-
-      <SectionContainer>
-        <H5Bold color="var(--color-primary-500)">Shop</H5Bold>
-        <SectionCard>
+      <MainLinksContainer>
+        <LinksContainer>
+          <BodyMedium color="var(--color-secondary-300)">
+            Best sellers
+          </BodyMedium>
           {collections.map((collection) => (
-            <CategoryItemContainer
+            <BodyMedium
               as={Link}
               to={`/${collection.handle}`}
               key={collection.id}
               onClick={toggleMenu}
+              color="var(--color-white)"
             >
-              <BodyMedium color="var(--color-950)">
-                {collection.title}
-              </BodyMedium>
-            </CategoryItemContainer>
+              {collection.title}
+            </BodyMedium>
           ))}
-        </SectionCard>
-      </SectionContainer>
-
-      <SectionContainer>
-        <H5Bold color="var(--color-primary-500)">Support</H5Bold>
-        <SectionCard>
-          <CategoryItemContainer as={Link} to="/contact" onClick={toggleMenu}>
-            <BodyMedium color="var(--color-950)">Contact</BodyMedium>
-          </CategoryItemContainer>
-          <CategoryItemContainer as={Link} to="/faq" onClick={toggleMenu}>
-            <BodyMedium color="var(--color-950)">FAQ</BodyMedium>
-          </CategoryItemContainer>
-        </SectionCard>
-      </SectionContainer>
+        </LinksContainer>
+        {isAuthenticated ? (
+          <>
+            <CategoryButton as={Link} to="/" onClick={toggleMenu}>
+              <BodyMedium color="var(--color-white)">My account</BodyMedium>
+            </CategoryButton>
+          </>
+        ) : (
+          <>
+            <CategoryButton as={Link} to="/sign-in" onClick={toggleMenu}>
+              <BodyMedium color="var(--color-white)">Log in</BodyMedium>
+            </CategoryButton>
+          </>
+        )}
+        <CategoryButton as={Link} to="/" onClick={toggleMenu}>
+          <BodyMedium color="var(--color-white)">Contact us</BodyMedium>
+        </CategoryButton>
+      </MainLinksContainer>
+      <Divider />
+      <SubscribeContainer>
+        <SubscribeTitle>
+          <BodyMedium color="var(--color-secondary-300)">Subscribe</BodyMedium>
+          <BodyMedium color="var(--color-white)">
+            Subscribe to our newsletter
+          </BodyMedium>
+        </SubscribeTitle>
+      </SubscribeContainer>
     </>
   );
 };
@@ -99,6 +78,7 @@ MobileMenuContent.propTypes = {
 export default MobileMenuContent;
 
 /* ----------STYLES---------- */
+
 const CloseOverlayContainer = styled.div`
   display: flex;
   height: 50px;
@@ -109,26 +89,87 @@ const CloseOverlayContainer = styled.div`
   align-self: stretch;
 `;
 
-const SectionContainer = styled.div`
+const MainLinksContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 20px;
   align-self: stretch;
 `;
 
-const SectionCard = styled.div`
+const CategoryButton = styled.button`
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #0e4f6b;
+`;
+
+const LinksContainer = styled.div`
+  display: flex;
+  padding: 0px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+`;
+
+const Divider = styled.div`
+  display: flex;
+  height: 1px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  background: #454545;
+`;
+
+const SubscribeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
   gap: 16px;
   align-self: stretch;
-  border-radius: 12px;
-  background: var(--color-050, #262626);
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0);
+  max-width: 350px;
 `;
 
-const CategoryItemContainer = styled.div`
+const SubscribeTitle = styled.div`
   display: flex;
-  padding: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+`;
+
+const SubscribeForm = styled.form`
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+`;
+
+const SubscribeInput = styled.input`
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+  border-radius: 8px;
+
+  border: 1px solid var(--color-800, #454545);
+  background: var(--color-050, #f6f6f6);
+`;
+
+const SubscribeButton = styled.button`
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  height: 42px;
+  border: 1px solid var(--color-800, #454545);
+  background: var(--color-accent-500);
 `;

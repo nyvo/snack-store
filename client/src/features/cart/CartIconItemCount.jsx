@@ -3,7 +3,7 @@ import { CartContext } from "@/features/cart/CartProvider";
 import styled from "styled-components";
 import { CartButton } from "@/shared/icons/HeaderIcons";
 import PropTypes from "prop-types";
-
+import { LabelMedium } from "@/shared/styles/CombinedFontStyles";
 
 const CartIconItemCount = ({ onClick, ariaExpanded, ariaLabel }) => {
   const { cartItems } = useContext(CartContext);
@@ -18,7 +18,11 @@ const CartIconItemCount = ({ onClick, ariaExpanded, ariaLabel }) => {
       aria-label={ariaLabel}
     >
       <CartButton />
-      {itemCount > 0 && <ItemCount>{itemCount}</ItemCount>}
+      {itemCount > 0 && (
+        <ItemCount>
+          <LabelMedium color="var(--color-black)">{itemCount}</LabelMedium>
+        </ItemCount>
+      )}
     </CartWrapper>
   );
 };
@@ -40,12 +44,13 @@ const CartWrapper = styled.div`
 
 const ItemCount = styled.div`
   position: absolute;
-  top: -7px;
-  right: -7px;
-  background-color: var(--color-primary-500);
-  color: white;
+  top: -7.5px;
+  right: -7.5px;
+  background-color: var(--color-secondary-500);
   border-radius: 50%;
-  padding: 1px 6px;
-  font-size: var(--font-size-xxs);
-  font-weight: var(--font-weight-medium);
+  width: 18px; /* Fixed width for circle */
+  height: 18px; /* Fixed height for circle */
+  display: flex; /* Center the content */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
 `;

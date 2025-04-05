@@ -48,7 +48,6 @@ export const TitleContainer = styled.div`
 `;
 
 export const SeeAllButton = styled.a`
-
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -58,7 +57,7 @@ export const SeeAllButton = styled.a`
 `;
 
 export const ArrowRightIcon = styled(FaArrowRight)`
-  color: var(--color-primary-500);
+  color: var(--color-primary-900);
 `;
 
 export const TitleWrapper = styled.div`

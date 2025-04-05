@@ -10,6 +10,7 @@ const MobileMenu = ({ isOpen, toggleMenu, closeMenu }) => {
       <MobileSlidingOverlay
         isOpen={isOpen}
         onClick={(e) => e.stopPropagation()}
+        style={{ backgroundColor: "var(--color-primary-900)" }}
       >
         <MobileMenuContent toggleMenu={toggleMenu} closeMenu={closeMenu} />
       </MobileSlidingOverlay>

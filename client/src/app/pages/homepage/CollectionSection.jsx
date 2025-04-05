@@ -34,7 +34,7 @@ const CollectionSection = () => {
             navigate(`/${collection?.handle}`); // Use React Router navigation
           }}
         >
-          <BodyMedium color="var(--color-primary-500)">See All</BodyMedium>
+          <BodyMedium color="var(--color-primary-900)">See All</BodyMedium>
           <ArrowRightIcon />
         </SeeAllButton>
       </TitleContainer>

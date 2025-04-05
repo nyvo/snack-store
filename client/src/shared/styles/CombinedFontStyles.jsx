@@ -7,7 +7,7 @@ const textStyles = css`
 `;
 
 const textStylesGray = css`
-  color: ${(props) => props.color || "var(--color-700)"};
+  color: ${(props) => props.color || "var(--color-600)"};
   font-family: var(--font-family-basier-square);
 `;
 
