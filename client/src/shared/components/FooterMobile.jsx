@@ -12,29 +12,27 @@ const FooterMobile = () => {
       <FooterContainer>
         <FlexRow>
           <LinksContainer>
-            <BodySemiBold color="var(--color-white)">About</BodySemiBold>
+            <BodySemiBold color="var(--color-primary-500)">About</BodySemiBold>
             <LinksColumn>
-              <SmallMedium style={{ color: "#AABACF" }}>
-                Oslo, Norway
-              </SmallMedium>
-              <SmallMedium style={{ color: "#AABACF" }}>
-                +47 95133850
-              </SmallMedium>
-              <SmallMedium style={{ color: "#AABACF" }}>
+              <SmallMedium color="var(--color-white)">Oslo, Norway</SmallMedium>
+              <SmallMedium color="var(--color-white)">+47 95133850</SmallMedium>
+              <SmallMedium color="var(--color-white)">
                 store@mail.com
               </SmallMedium>
             </LinksColumn>
           </LinksContainer>
 
           <LinksContainer>
-            <BodySemiBold color="var(--color-white)">Support</BodySemiBold>
+            <BodySemiBold color="var(--color-primary-500)">
+              Support
+            </BodySemiBold>
             <LinksColumn>
-              <SmallMedium style={{ color: "#AABACF" }}>Contact us</SmallMedium>
-              <SmallMedium style={{ color: "#AABACF" }}>FAQ</SmallMedium>
-              <SmallMedium style={{ color: "#AABACF" }}>
+              <SmallMedium color="var(--color-white)">Contact us</SmallMedium>
+              <SmallMedium color="var(--color-white)">FAQ</SmallMedium>
+              <SmallMedium color="var(--color-white)">
                 Privacy Policy
               </SmallMedium>
-              <SmallMedium style={{ color: "#AABACF" }}>
+              <SmallMedium color="var(--color-white)">
                 Shipping & Returns
               </SmallMedium>
             </LinksColumn>
@@ -43,21 +41,27 @@ const FooterMobile = () => {
         <Divider />
         <SubscribeContainer>
           <SubscribeTitle>
-            <BodySemiBold color="var(--color-white)">Subscribe</BodySemiBold>
-            <SmallMedium style={{ color: "#AABACF" }}>
+            <BodySemiBold color="var(--color-primary-500)">
+              Subscribe
+            </BodySemiBold>
+            <SmallMedium color="var(--color-white)">
               Get 10% off your first order
             </SmallMedium>
             <SubscribeForm>
               <SubscribeInput type="email" placeholder="Enter email address" />
               <SubscribeButton>
-                <SmallMedium color="var(--color-white)">Sign up</SmallMedium>
+                <SmallMedium color="var(--color-secondary-900)">
+                  Sign up
+                </SmallMedium>
               </SubscribeButton>
             </SubscribeForm>
           </SubscribeTitle>
         </SubscribeContainer>
         <Divider />
         <PaymentsContainer>
-          <BodySemiBold color="var(--color-white)">We accept</BodySemiBold>
+          <BodySemiBold color="var(--color-primary-500)">
+            We accept
+          </BodySemiBold>
           <PaymentIcons>
             <LabelMedium color="var(--color-white)">
               payment icons goes here
@@ -70,7 +74,7 @@ const FooterMobile = () => {
               social icons goes here
             </LabelMedium>
           </SocialIcons>
-          <LabelRegular style={{ color: "rgba(245, 247, 250, 0.50)" }}>
+          <LabelRegular style={{ color: "rgba(255, 255, 255, 0.5)" }}>
             © 2025 [Company Name]
           </LabelRegular>
         </SocialsContainer>
@@ -89,7 +93,7 @@ const FooterContainer = styled.footer`
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  background: var(--color-950, #262626);
+  background: var(--color-primary-900);
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -173,7 +177,7 @@ const SubscribeButton = styled.button`
   border-radius: 8px;
   height: 42px;
   border: 1px solid var(--color-800, #454545);
-  background: var(--color-primary-500, #4362ee);
+  background: var(--color-accent-500);
 `;
 
 const PaymentsContainer = styled.div`
