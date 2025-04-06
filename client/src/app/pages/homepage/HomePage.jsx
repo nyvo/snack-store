@@ -1,19 +1,12 @@
 // HomePage.jsx
 import { useContext } from "react";
-import Header from "@/shared/components/Header";
-import Footer from "@/shared/components/Footer";
 import {
   CollectionProvider,
   CollectionContext,
 } from "@/app/context/CollectionProvider";
 import CollectionSection from "./CollectionSection";
 import { ErrorProduct } from "@/shared/styles/ErrorStyles";
-import {
-  FullWidthContainer,
-  PageContainer,
-  ContentContainer,
-} from "@/shared/styles/LayoutStyles";
-import FooterMobile from "@/shared/components/FooterMobile";
+import { PageContainer, ContentContainer } from "@/shared/styles/LayoutStyles";
 
 const HomePage = () => {
   const { collections, error } = useContext(CollectionContext);
@@ -21,9 +14,6 @@ const HomePage = () => {
 
   return (
     <>
-      <FullWidthContainer style={{ backgroundColor: "var(--color-pwhite)" }}>
-        <Header />
-      </FullWidthContainer>
       <PageContainer>
         <ContentContainer>
           {error && <ErrorProduct />}
@@ -34,9 +24,6 @@ const HomePage = () => {
           ))}
         </ContentContainer>
       </PageContainer>
-      <FullWidthContainer>
-        <FooterMobile />
-      </FullWidthContainer>
     </>
   );
 };

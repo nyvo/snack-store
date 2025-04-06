@@ -3,11 +3,8 @@ import styled from "styled-components";
 
 export const FullWidthContainer = styled.div`
   width: 100%;
-  background-color: var(
-    --color-primary-900
-  ); // Add your desired background color
+  background-color: ${({ bgColor }) => bgColor || "transparent"};
 `;
-
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;

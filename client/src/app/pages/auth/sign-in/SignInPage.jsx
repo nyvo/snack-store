@@ -1,16 +1,12 @@
 import SignInContent from "./SignInContent";
-import { PageContainer, ContentContainer } from "@/shared/styles/LayoutStyles";
-import HeaderNoNav from "@/shared/components/HeaderNoNav";
+import { ContentContainer } from "@/shared/styles/LayoutStyles";
 
 const SignInPage = () => {
   return (
     <>
-      <PageContainer>
-        <HeaderNoNav />
-        <ContentContainer>
-          <SignInContent />
-        </ContentContainer>
-      </PageContainer>
+      <ContentContainer>
+        <SignInContent />
+      </ContentContainer>
     </>
   );
 };

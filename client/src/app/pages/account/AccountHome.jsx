@@ -5,13 +5,11 @@ import {
   PageContainer,
   ContentContainerBigGap,
 } from "@/shared/styles/LayoutStyles";
-import Footer from "@/shared/components/Footer";
 import { SmallMedium } from "@/shared/styles/CombinedFontStyles";
 import { AuthButton } from "@/shared/styles/AuthStyles";
 import { AccountDetails } from "@/shared/styles/AccountStyles";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "@/shared/components/Header";
 import OrdersSection from "./OrdersSection";
 import DetailsSection from "./DetailsSection";
 import { TitleContainer } from "@/shared/styles/AccountStyles";
@@ -80,7 +78,6 @@ const AccountHome = () => {
 
   return (
     <PageContainer>
-      <Header />
       <ContentContainerBigGap>
         <TitleContainer>
           <H5Bold>My Account</H5Bold>
@@ -98,7 +95,7 @@ const AccountHome = () => {
           </AuthButton>
         </AccountDetails>
       </ContentContainerBigGap>
-      <Footer />
+
       <ToastContainer />
     </PageContainer>
   );

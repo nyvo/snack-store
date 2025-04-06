@@ -1,11 +1,13 @@
 import useMobile from "../hooks/useMobile";
+import FooterMobile from "./FooterMobile";
 
 const FooterWrapper = () => {
   const isMobile = useMobile();
 
   return (
     <>
-      {isMobile ? <FooterMobile /> : <FooterDesktop />}
+      {/* {isMobile ? <FooterMobile /> : <FooterDesktop />} */}
+      <FooterMobile />
     </>
   );
 };
