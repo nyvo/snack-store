@@ -43,3 +43,11 @@ export const ContentContainerBigGap = styled.div`
   gap: 2rem;
   flex: 1;
 `;
+
+export const FormContainer = styled.div`
+  max-width: 350px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;

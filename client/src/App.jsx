@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "@/app/pages/homepage/HomePage";
 import ProductPage from "@/app/pages/productpage/ProductPage";
 import GlobalStyle from "@/shared/styles/GlobalStyle";
@@ -21,23 +16,7 @@ import ResetPasswordContainer from "@/app/pages/auth/reset-password/ResetPasswor
 import OrderConfirmPage from "@/features/orderconfirmation/OrderConfirmPage";
 import ProtectedRoute from "@/app/pages/auth/ProtectedRoute";
 import PublicRoute from "@/app/pages/auth/PublicRoute";
-import FooterWrapper from "@/shared/components/FooterWrapper";
-import { FullWidthContainer } from "@/shared/styles/LayoutStyles";
-import Header from "./shared/components/Header";
-
-const Layout = () => (
-  <>
-    <FullWidthContainer bgColor="var(--color-white)">
-      <Header />
-    </FullWidthContainer>
-    <main>
-      <Outlet />
-    </main>
-    <FullWidthContainer bgColor="var(--color-primary-900)">
-      <FooterWrapper />
-    </FullWidthContainer>
-  </>
-);
+import { Layout } from "@/shared/components/Layout";
 
 function App() {
   return (
@@ -62,23 +41,25 @@ function App() {
                     }
                   />
                   <Route path="/order/success" element={<OrderConfirmPage />} />
+                  {/* Only signin and signup moved here */}
+                  <Route
+                    path="/signin"
+                    element={
+                      <PublicRoute>
+                        <SignInPage />
+                      </PublicRoute>
+                    }
+                  />
+                  <Route
+                    path="/signup"
+                    element={
+                      <PublicRoute>
+                        <SignUpPage />
+                      </PublicRoute>
+                    }
+                  />
                 </Route>
-                <Route
-                  path="/signin"
-                  element={
-                    <PublicRoute>
-                      <SignInPage />
-                    </PublicRoute>
-                  }
-                />
-                <Route
-                  path="/signup"
-                  element={
-                    <PublicRoute>
-                      <SignUpPage />
-                    </PublicRoute>
-                  }
-                />
+                {/* Kept outside Layout */}
                 <Route
                   path="/forgot-password"
                   element={<ForgotPasswordContainer />}
